@@ -9,6 +9,9 @@ class Users extends CI_Model {
     private $email;
     private $password;
     private $signup_date;
+    private $nama_lengkap;
+    private $no_hp;
+    private $alamat;
 
     function getId_users() {
         return $this->id_users;
@@ -28,6 +31,18 @@ class Users extends CI_Model {
 
     function getSignup_date() {
         return $this->signup_date;
+    }
+
+    function getNama_lengkap(){
+        return $this->nama_lengkap;
+    }
+
+    function getNo_hp(){
+        return $this->no_hp;
+    }
+
+    function getAlamat(){
+        return $this->alamat;
     }
 
     function setId_users($id_users) {
@@ -50,6 +65,18 @@ class Users extends CI_Model {
         $this->signup_date = $signup_date;
     }
 
+    function setNama_lengkap($nama_lengkap){
+        $this->nama_lengkap = $nama_lengkap;
+    }
+
+    function setNo_hp($no_hp){
+        $this->no_hp = $no_hp;
+    }
+
+    function setAlamat($alamat){
+        $this->alamat = $alamat;
+    }
+
     function find($param = "id_users", $val = "") {
         if ($val == "") {
             return $this->db->get("users");
@@ -59,7 +86,7 @@ class Users extends CI_Model {
     }
 
     function save() {
-        $data = array("id_users" => $this->id_users, "username" => $this->username, "email" => $this->email, "password" => $this->password, "signup_date" => date("Y-m-d"));
+        $data = array("id_users" => $this->id_users, "username" => $this->username, "email" => $this->email, "password" => $this->password, "signup_date" => date("Y-m-d"), "nama_lengkap" => $this->nama_lengkap, "no_hp" => $this->no_hp, "alamat" => $this->alamat);
         return $this->db->insert("users", $data);
     }
 

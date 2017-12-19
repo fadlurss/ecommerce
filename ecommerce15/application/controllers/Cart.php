@@ -7,6 +7,7 @@ class cart extends CI_Controller {
         parent:: __construct();
         $this->load->model("Users");
         $this->session->nama;
+        $contoh_session;
     }
     
         
@@ -15,10 +16,13 @@ class cart extends CI_Controller {
         if (isset($_POST["signup"])) {
             $post = $this->input->post(null, true);
             $users = $this->Users;
-            if ($post["username"] != "" && $post["email"] != "" && $post["password"] != "") {
+            if ($post["username"] != "" && $post["email"] != "" && $post["password"] != "" && $post["nama_lengkap"] != "" && $post["no_hp"] != "" && $post["alamat"] != "") {
                 $users->setUsername($post["username"]);
                 $users->setEmail($post["email"]);
                 $users->setPassword(md5($post["password"]));
+                $users->setNama_lengkap($post["nama_lengkap"]);
+                $users->setNo_hp($post["no_hp"]);
+                $users->setAlamat($post["alamat"]);
                 $ins = $users->save();
                 if ($ins) {
                     redirect(base_url('home'));
@@ -32,24 +36,28 @@ class cart extends CI_Controller {
         $this->load->view('home',$data);
     }
 
-    public function login_user() {
+        public function login_user() {
         $data = array();
         if(isset($_POST["login"])){
             $post  = $this->input->post(null,true);
             $users = $this->Users;
-            if($post["username"] != "" && $post["password"]){
-                if($users->find("username",$post["username"])->num_rows() > 0){
+            if($post["email"] != "" && $post["password"]){
+                if($users->find("email",$post["email"])->num_rows() > 0){
                     if($users->find("password",md5($post["password"]))->num_rows() > 0){
                         $id_users = $users->find("username",$post["username"]);
-                        $this->session->set_userdata("nama",$post["username"]);
+                        $this->session->set_userdata("nama",$post["email"]);
                         $this->session->set_userdata("id_users",$id_users->row()->id_users);
+                        $this->session->set_userdata("username",$id_users->row()->id_users);
+
+                        $contoh_session = $this->session->set_userdata("email", $post["email"]);
+
                         $data["msg"] = "Login Berhasil";
                         redirect(base_url("home"));
                     }else{
                         $data["msg"] = "Password Salah";
                     }
                 }else{
-                    $data["msg"] = "Username Salah";
+                    $data["msg"] = "Email Salah";
                 }
             }else{
                 $data["msg"] = "Oops Fill All Field";
@@ -57,6 +65,31 @@ class cart extends CI_Controller {
         }
         $this->load->view('home',$data);
     }
+
+
+    //  function checkout() {
+    //    $data['product'] = "";
+    //    $coba = $this->db->get_where('users', array('email' => $_SESSION["email"]));
+    //    echo $coba->num_rows();
+    //    die();
+       
+    // }
+
+
+     function checkout() {
+        if (isset($_POST['submit'])) {
+            $this->proses_chekout();
+            $this->template->load('template', 'berhasil');
+        } else {
+            if ($_SESSION["email"] != '') {
+                $data['member'] = $this->db->get_where('users', array('nama_lengkap' => $this->session->userdata('nama')))->row_array();
+                $this->template->load('template', 'checkout_member', $data);
+            } else {
+                $this->template->load('template', 'checkout_guest');
+            }
+        }
+    }
+
     public function logout(){
         $this->session->sess_destroy();
         redirect(base_url());
@@ -138,19 +171,7 @@ class cart extends CI_Controller {
         }
     }
 
-    function checkout() {
-        if (isset($_POST['submit'])) {
-            $this->proses_chekout();
-            $this->template->load('template', 'berhasil');
-        } else {
-            if ($this->session->userdata('nama') != '') {
-                $data['member'] = $this->db->get_where('tabel_member', array('nama_lengkap' => $this->session->userdata('nama')))->row_array();
-                $this->template->load('template', 'checkout_member', $data);
-            } else {
-                $this->template->load('template', 'checkout_guest');
-            }
-        }
-    }
+   
 
     function login() {
         $this->template->load('template', 'login');

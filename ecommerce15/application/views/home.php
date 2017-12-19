@@ -157,8 +157,7 @@
                                 <div class="error"></div>
                                 <div class="form loginBox">
                                     <form method="post" action="<?= base_url(). "cart/login_user" ;?>" accept-charset="UTF-8">
-                                    
-                                    <input id="username" class="form-control" type="text" placeholder="username" name="username">
+                                    <input id="email" class="form-control" type="email" placeholder="email" name="email" required="">
                                     <input id="password" class="form-control" type="password" placeholder="Password" name="password">
                                     <button type="submit" name="login" id="login" class="btn btn-primary">Login</button>
                                     </form>
@@ -185,6 +184,18 @@
                                     <div class="form-group">
                                         <label class="sr-only" for="form-email">Email</label>
                                         <input type="text" name="email" placeholder="Email..." class="form-email form-control" id="email">
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="sr-only" for="form-nama_lengkap">Nama Lengkap</label>
+                                        <input type="text" name="nama_lengkap" placeholder="Nama Lengkap..." class="form-nama_lengkap form-control" id="nama_lengkap">
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="sr-only" for="form-no_hp">Nomor Handphone</label>
+                                        <input type="text" name="no_hp" placeholder="No Hp..." class="form-no_hp form-control" id="no_hp">
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="sr-only" for="form-email">Alamat</label>
+                                        <textarea name="alamat" id="alamat"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-password">Password</label>
