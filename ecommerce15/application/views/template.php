@@ -96,7 +96,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 }
                             ?>
                             <li><a href="products.html">Products</a></li>
-                            <?php if($_SESSION["email"] == null) { ?>
+                            <?php if($this->session->email == null) { ?>
                              <li><a class="btn login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log in / Register</a></li>
                              <?php } else { ?>
                             <li><a href="<?= base_url("cart/logout") ?>">Log Out</a></li>
@@ -136,7 +136,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 ?>
 </li>
                             <li class="last"><a href="contact.html">Contact</a></li>
-                             
+                    
                         </ul>
                      </div><!-- /.navbar-collapse -->
                   

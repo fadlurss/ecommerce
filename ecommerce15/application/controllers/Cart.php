@@ -6,8 +6,6 @@ class cart extends CI_Controller {
         public function __construct() {
         parent:: __construct();
         $this->load->model("Users");
-        $this->session->nama;
-        $contoh_session;
     }
     
         
@@ -23,6 +21,20 @@ class cart extends CI_Controller {
                 $users->setNama_lengkap($post["nama_lengkap"]);
                 $users->setNo_hp($post["no_hp"]);
                 $users->setAlamat($post["alamat"]);
+
+                $sess_email = $this->session->set_userdata("email", $post["email"]);
+                $sess_username = $this->session->set_userdata("username", $post["username"]);
+                $sess_password = $this->session->set_userdata("password", $post["password"]);
+                $sess_nama_lengkap = $this->session->set_userdata("nama_lengkap", $post["nama_lengkap"]);
+                $sess_no_hp = $this->session->set_userdata("no_hp", $post["no_hp"]);
+                $sess_alamat = $this->session->set_userdata("alamat", $post["alamat"]);
+
+
+                //cara manggil session
+                $this->session->userdata("email")
+                $this->session->email
+                // end cara manggil session
+
                 $ins = $users->save();
                 if ($ins) {
                     redirect(base_url('home'));

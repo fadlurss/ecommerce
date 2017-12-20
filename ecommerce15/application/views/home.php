@@ -78,11 +78,11 @@
         
     </div>
     <div class="c-btm">
-        <?php foreach ($product->result() as $p) { ?>
+        
         <div class="content-top1">
             <div class="container">
-               
-                <div class="col-md-4 col-md2 animated wow fadeInLeft" data-wow-delay=".5s">
+               <?php foreach ($product->result() as $p) { ?>
+                <div class="col-md-3 col-md2 animated wow fadeInLeft" data-wow-delay=".5s">
                      
                     <div class="col-md1 simpleCart_shelfItem">
                             <img class="img-responsive" src="<?=base_url().'gambar_product/'. $p->gambar ?>" alt=""/>
@@ -98,7 +98,8 @@
                         
                     </div>
                       
-                </div>  
+                </div>
+                <?php } ?>  
             <!-- <div class="col-md-3 col-md2 animated wow fadeInRight" data-wow-delay=".5s">
                     <div class="col-md1 simpleCart_shelfItem">
                         <a href="single.html">
@@ -117,7 +118,7 @@
           
             </div>  
         </div>
-        <?php } ?>
+        
     </div>
 
 
